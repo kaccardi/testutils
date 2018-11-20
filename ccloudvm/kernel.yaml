@@ -3,10 +3,6 @@ base_image_url: https://download.fedoraproject.org/pub/fedora/linux/releases/28/
 base_image_name: Fedora 28
 vm:
   disk_gib: 16
-  mounts:
-  - tag: hostlinuxsrc
-    security_model: passthrough
-    path: /home/{{$.User}}/src/linux
 ...
 ---
 {{- define "ENV" -}}
