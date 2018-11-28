@@ -2,9 +2,9 @@
 base_image_url: https://download.fedoraproject.org/pub/fedora/linux/releases/28/Cloud/x86_64/images/Fedora-Cloud-Base-28-1.1.x86_64.qcow2
 base_image_name: Fedora 28
 vm:
-  mem_mib: 512
+  mem_mib: 768
   disk_gib: 16
-  KVM: true
+  no_kvm_enable: true
 ...
 ---
 {{- define "ENV" -}}
