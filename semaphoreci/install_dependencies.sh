@@ -21,6 +21,7 @@ function setupCcloudVM {
     setupGoLang
     mkdir -p ~/.ccloudvm/workloads
     cp testutils/ccloudvm/kernel.yaml ~/.ccloudvm/workloads
+    go get github.com/intel/ccloudvm/...
     pushd $(go env GOPATH)/src/github.com/intel
     mv ccloudvm ccloudvm.orig
     ln -s ../kaccardi/ccloudvm ccloudvm
