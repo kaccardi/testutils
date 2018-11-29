@@ -24,6 +24,7 @@ function setupCcloudVM {
     go get github.com/intel/ccloudvm/...
     pushd $(go env GOPATH)/src/github.com/intel
     mv ccloudvm ccloudvm.orig
+    go get github.com/kaccardi/ccloudvm/...
     ln -s ../kaccardi/ccloudvm ccloudvm
     cd ccloudvm
     git checkout origin/disable-kvm
