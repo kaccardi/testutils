@@ -54,5 +54,5 @@ setupCcloudVM
 createTestVM
 myssh=`ccloudvm status | grep ssh`
 mysshcmd=`echo $myssh | cut -d : -f 2`
-$mysshcmd "mount"
+$mysshcmd "uname -r"
 
