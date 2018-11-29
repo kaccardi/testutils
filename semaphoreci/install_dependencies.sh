@@ -24,10 +24,9 @@ function setupCcloudVM {
     cp testutils/ccloudvm/kernel.yaml ~/.ccloudvm/workloads
     echo "getting ccloudvm source..."
     go get github.com/intel/ccloudvm/...
+    go get github.com/kaccardi/ccloudvm/...
     pushd $(go env GOPATH)/src/github.com/intel
     mv ccloudvm ccloudvm.orig
-    echo "getting ccloudvm fork..."
-    go get github.com/kaccardi/ccloudvm/...
     ln -s ../kaccardi/ccloudvm ccloudvm
     ls -l
     cd ccloudvm
