@@ -19,14 +19,19 @@ function setupGoLang {
 
 function setupCcloudVM {
     setupGoLang
+    echo "copying workloads..."
     mkdir -p ~/.ccloudvm/workloads
     cp testutils/ccloudvm/kernel.yaml ~/.ccloudvm/workloads
+    echo "getting ccloudvm source..."
     go get github.com/intel/ccloudvm/...
     pushd $(go env GOPATH)/src/github.com/intel
     mv ccloudvm ccloudvm.orig
+    echo "getting ccloudvm fork..."
     go get github.com/kaccardi/ccloudvm/...
     ln -s ../kaccardi/ccloudvm ccloudvm
+    ls -l
     cd ccloudvm
+    pwd
     git checkout origin/disable-kvm
     go install ./...
     popd
