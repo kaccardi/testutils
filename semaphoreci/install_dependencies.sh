@@ -47,6 +47,7 @@ function createTestVM {
         status=`ccloudvm status | grep VM | cut -d : -f 2`
         echo "status is $status"
     done
+    echo "status is $status"
 }
 
 updateUbuntu
@@ -54,5 +55,6 @@ setupCcloudVM
 createTestVM
 myssh=`ccloudvm status | grep ssh`
 mysshcmd=`echo $myssh | cut -d : -f 2`
+echo $mysshcmd
 $mysshcmd "uname -r"
 
