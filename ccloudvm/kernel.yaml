@@ -5,6 +5,12 @@ vm:
   mem_mib: 768
   disk_gib: 16
   no_kvm_enable: true
+{{with .GoPath}}
+  mounts:
+  - tag: hostgo
+    security_model: passthrough
+    path: {{.}}
+{{end}}
 ...
 ---
 {{- define "ENV" -}}
