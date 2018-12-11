@@ -40,11 +40,11 @@ function createTestVM {
     ccloudvm setup
     ccloudvm create kernel
     ccloudvm status
-    status=`ccloudvm status | grep VM | cut -d : -f 2`
+    status=`ccloudvm status | grep VM | cut -d : -f 2 | sed -e 's/^[ \t]*//'`
     echo "status is $status"
-    while [[ $status == "VM down" ]]; do
+    while [ "$status" = "VM down" ]; do
         sleep 5
-        status=`ccloudvm status | grep VM | cut -d : -f 2`
+        status=`ccloudvm status | grep VM | cut -d : -f 2 | sed -e 's/^[ \t]*//'`
         echo "status is $status"
     done
     echo "status is $status"
