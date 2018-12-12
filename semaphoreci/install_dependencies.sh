@@ -57,7 +57,7 @@ setupCcloudVM
 createTestVM
 ccloudvm status
 myssh=`ccloudvm status | grep ssh`
-mysshcmd=`echo $myssh | cut -d : -f 2`
+mysshcmd=`echo $myssh | cut -d : -f 2 | sed -e 's/^[ \t]*//'`
 echo "ssh string is $mysshcmd"
 $mysshcmd "uname -r"
 
