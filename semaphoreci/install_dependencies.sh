@@ -45,8 +45,10 @@ function createTestVM {
     while [ "$status" = "VM down" ]; do
         sleep 5
         status=`ccloudvm status | grep VM | cut -d : -f 2 | sed -e 's/^[ \t]*//'`
+        ccloudvm status
         echo "status is $status"
     done
+    ccloudvm status
     echo "status is $status"
 }
 
