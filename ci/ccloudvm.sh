@@ -1,12 +1,9 @@
 #!/bin/bash
+#
+# functions that help setup ccloudvm environment for testing.
+#
 
-function updateUbuntu {
-    sudo apt-get -y update
-    sudo apt-get install -y git flex bison build-essential fakeroot libncurses5-dev libssl-dev ccache libelf-dev bc python3-pip qemu-kvm qemu libburn4 libisoburn1 libisofs6 libjte1 xorriso systemd-services --fix-missing
-    sudo apt-get autoremove -y
-    sudo apt-get clean -y
-}
-
+# needed on the host environment.
 function setupGoLang {
     pushd /tmp
     wget https://dl.google.com/go/go1.11.linux-amd64.tar.gz
@@ -19,6 +16,7 @@ function setupGoLang {
     export GOPATH=$HOME
 }
 
+# setup within the host environment to create the VM under test.
 function setupCcloudVM {
     setupGoLang
     echo "copying workloads..."
@@ -38,9 +36,8 @@ function setupCcloudVM {
     popd
 }
 
-function createTestVM {
-    ccloudvm setup
-    ccloudvm create kernel
+# wait for ccloudvm to return VM up status
+function waitForVM {
     ccloudvm status
     status=`ccloudvm status | grep VM | cut -d : -f 2 | sed -e 's/^[ \t]*//'`
     echo "status is $status"
@@ -54,17 +51,14 @@ function createTestVM {
     echo "status is $status"
 }
 
-updateUbuntu
-setupCcloudVM
-createTestVM
-ccloudvm status
-myssh=`ccloudvm status | grep ssh`
-mysshcmd=`echo $myssh | cut -d : -f 2 | sed -e 's/^[ \t]*//'`
-echo "ssh string is $mysshcmd"
-retval=`$mysshcmd "ls /home"`
-echo "return value $?"
-echo "retval is $retval"
-retval=`$mysshcmd "mount"`
-echo "return value $?"
-echo "retval is $retval"
+# assumes you've already run setup.
+function createVM {
+    ccloudvm create $1
+    waitForVM
+}
 
+# call from within your host environment.
+function createTestVM {
+    ccloudvm setup
+    createVM "kernel"
+}
