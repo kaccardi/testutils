@@ -1,7 +1,9 @@
 #!/bin/bash
 
-source ccloudvm.sh
-source semaphoreci.sh
+DIR="${BASH_SOURCE%/*}"
+
+source "$DIR/ccloudvm.sh"
+source "$DIR/semaphoreci.sh"
 
 updateUbuntu
 setupCcloudVM
