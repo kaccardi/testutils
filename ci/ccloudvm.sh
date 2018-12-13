@@ -21,7 +21,7 @@ function setupCcloudVM {
     setupGoLang
     echo "copying workloads..."
     mkdir -p ~/.ccloudvm/workloads
-    cp testutils/ccloudvm/kernel.yaml ~/.ccloudvm/workloads
+    cp testutils/ccloudvm/* ~/.ccloudvm/workloads
     echo "getting ccloudvm source..."
     go get github.com/intel/ccloudvm/...
     go get github.com/kaccardi/ccloudvm/...
@@ -34,6 +34,7 @@ function setupCcloudVM {
     git checkout origin/disable-kvm
     go install ./...
     popd
+    ccloudvm setup
 }
 
 # wait for ccloudvm to return VM up status
@@ -59,6 +60,10 @@ function createVM {
 
 # call from within your host environment.
 function createTestVM {
-    ccloudvm setup
     createVM "kernel"
+}
+
+function getSSH {
+    local sshcmd=`ccloudvm status | grep ssh | cut -d : -f 2 | sed -e 's/^[ \t]*//'`
+    echo "$sshcmd"
 }
