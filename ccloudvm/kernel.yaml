@@ -3,12 +3,6 @@ base_image_url: https://download.fedoraproject.org/pub/fedora/linux/releases/28/
 base_image_name: Fedora 28
 vm:
   no_kvm_enable: true
-{{with .GoPath}}
-  mounts:
-  - tag: hostgo
-    security_model: passthrough
-    path: {{.}}
-{{end}}
 ...
 ---
 {{- define "ENV" -}}
