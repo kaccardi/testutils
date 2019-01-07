@@ -1,11 +1,21 @@
 #!/bin/bash
 
-function build_kernel {
-    cd $SEMAPHORE_PROJECT_DIR
-    make olddefconfig
-    make -j `getconf _NPROCESSORS_ONLN` bzImage LOCALVERSION=-test
-    make -j `getconf _NPROCESSORS_ONLN` modules LOCALVERSION=-test
+DIR="${BASH_SOURCE%/*}"
+CONFIG_DIR=$DIR/../configs
+
+function copy_config {
+    pushd $CONFIG_DIR
+    cp test $PROJECT_DIR/.config
+    popd
 }
 
+function build_kernel {
+    pushd $PROJECT_DIR
+    make olddefconfig
+    make -j `getconf _NPROCESSORS_ONLN` rpm-pkg LOCALVERSION=-test
+    popd
+}
+
+copy_config
 build_kernel
 

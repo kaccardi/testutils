@@ -67,3 +67,21 @@ function getSSH {
     local sshcmd=`ccloudvm status | grep ssh | cut -d : -f 2 | sed -e 's/^[ \t]*//'`
     echo "$sshcmd"
 }
+
+
+function getHostIP {
+    local hostip=`ccloudvm status | grep HostIP | cut -d : -f 2 | sed -e 's/^[ \t]*//'`
+    echo "$hostip"
+}
+
+function getHostPort {
+    local sshcmd=$(getSSH)
+    local port=${sshcmd##*-p }
+    echo "$port"
+}
+
+function getHostKey {
+    sshcmd=$(getSSH)
+    local key=`echo $sshcmd | grep -Po "(?<=(-i )).*(?= ${hostip})"`
+    echo $key
+}
