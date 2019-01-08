@@ -39,17 +39,13 @@ function setupCcloudVM {
 
 # wait for ccloudvm to return VM up status
 function waitForVM {
-    ccloudvm status
     status=`ccloudvm status | grep VM | cut -d : -f 2 | sed -e 's/^[ \t]*//'`
-    echo "status is $status"
     while [ "$status" = "VM down" ]; do
         sleep 5
         status=`ccloudvm status | grep VM | cut -d : -f 2 | sed -e 's/^[ \t]*//'`
         ccloudvm status
-        echo "status is $status"
     done
     ccloudvm status
-    echo "status is $status"
 }
 
 # assumes you've already run setup.
@@ -84,4 +80,11 @@ function getHostKey {
     sshcmd=$(getSSH)
     local key=`echo $sshcmd | grep -Po "(?<=(-i )).*(?= ${hostip})"`
     echo $key
+}
+
+function restartVM {
+    ccloudvm stop
+    ccloudvm start
+    waitForVM
+    return 0
 }
