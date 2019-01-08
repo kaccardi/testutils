@@ -2,7 +2,7 @@
 
 DIR="${BASH_SOURCE%/*}"
 RPMDIR="$HOME/rpmbuild/RPMS/x86_64/"
-source "$DIR/ccloudvm.sh"
+source "$DIR/ccloudvm.bash"
 
 sshcmd=$(getSSH)
 echo $sshcmd

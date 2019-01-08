@@ -2,7 +2,7 @@
 
 DIR="${BASH_SOURCE%/*}"
 
-source "$DIR/ccloudvm.sh"
+source "$DIR/ccloudvm.bash"
 source "$DIR/semaphoreci.sh"
 
 updateUbuntu

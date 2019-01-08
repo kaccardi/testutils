@@ -3,7 +3,7 @@
 # create a test environment for local testing
 #
 DIR="${BASH_SOURCE%/*}"
-source "$DIR/ccloudvm.sh"
+source "$DIR/ccloudvm.bash"
 
 mkdir -p ~/.ccloudvm/workloads
 cp $DIR/../ccloudvm/* ~/.ccloudvm/workloads
