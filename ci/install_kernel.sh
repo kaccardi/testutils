@@ -20,5 +20,8 @@ key=$(getHostKey)
 echo key is $key
 
 scp -F /dev/null -o UserKnownHostsFile=/dev/null -o StrictHostKeyChecking=no -o IdentitiesOnly=yes -i $key -P $port $kernel $hostip:
-popd
 
+$sshcmd "sudo rpm -i $kernel"
+$sshcmd "sudo grub2-set-default 0"
+$sshcmd "sudo reboot"
+popd
