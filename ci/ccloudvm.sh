@@ -88,3 +88,8 @@ function restartVM {
     waitForVM
     return 0
 }
+
+function runCmdInVM {
+    sshcmd=$(getSSH)
+    $sshcmd $1
+}
