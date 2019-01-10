@@ -24,16 +24,16 @@ function setupCcloudVM {
     cp testutils/ccloudvm/* ~/.ccloudvm/workloads
     echo "getting ccloudvm source..."
     go get github.com/intel/ccloudvm/...
-    go get github.com/kaccardi/ccloudvm/...
-    pushd $(go env GOPATH)/src/github.com/intel
-    mv ccloudvm ccloudvm.orig
-    ln -s ../kaccardi/ccloudvm ccloudvm
-    ls -l
-    cd ccloudvm
-    pwd
-    git checkout origin/disable-kvm
-    go install ./...
-    popd
+    if [[ -z "${SEMAPHORE}" ]]; then
+        go get github.com/kaccardi/ccloudvm/...
+        pushd $(go env GOPATH)/src/github.com/intel
+        mv ccloudvm ccloudvm.orig
+        ln -s ../kaccardi/ccloudvm ccloudvm
+        cd ccloudvm
+        git checkout origin/disable-kvm
+        go install ./...
+        popd
+    fi
     ccloudvm setup
 }
 
