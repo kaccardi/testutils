@@ -24,7 +24,7 @@ function setupCcloudVM {
     cp testutils/ccloudvm/* ~/.ccloudvm/workloads
     echo "getting ccloudvm source..."
     go get github.com/intel/ccloudvm/...
-    if [[ -z "${SEMAPHORE}" ]]; then
+    if [[ -n "${SEMAPHORE}" ]]; then
         go get github.com/kaccardi/ccloudvm/...
         pushd $(go env GOPATH)/src/github.com/intel
         mv ccloudvm ccloudvm.orig
