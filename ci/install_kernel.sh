@@ -21,7 +21,7 @@ echo key is $key
 
 scp -F /dev/null -o UserKnownHostsFile=/dev/null -o StrictHostKeyChecking=no -o IdentitiesOnly=yes -i $key -P $port $kernel $hostip:
 
-$sshcmd "sudo rpm -i $kernel"
-$sshcmd "sudo grub2-set-default 0"
-$sshcmd "sudo reboot"
+runCmdInVM "sudo rpm -i $kernel"
+runCmdInVM "sudo grub2-set-default 0"
+restartVM
 popd

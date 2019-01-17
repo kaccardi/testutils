@@ -57,25 +57,15 @@ runcmd:
  - {{endTaskCheck .}}
 
  - {{beginTask . "Adding to kvm group"}}
- - adduser {{.User}} kvm
+ - adduser {{$.User}} kvm
  - {{endTaskCheck .}}
 
  - {{beginTask . "Installing rpm support"}}
  - {{template "ENV" .}}apt-get install rpm -y
  - {{endTaskCheck .}}
 
- - {{beginTask . "Installing project"}}
- - pushd /home/{{.User}}
- - sudo -u {{.User}} git clone https://github.com/kaccardi/linux
- - popd
- - {{endTaskCheck .}}
-
- - {{beginTask . "Installing bats"}}
- - pushd /home/{{.User}}
- - sudo -u {{.User}} git clone https://github.com/sstephenson/bats.git
- - cd bats
- - ./install.sh /usr/local
- - popd
+ - {{beginTask . "Allow user to persist services"}}
+ - sudo loginctl enable-linger {{$.User}}
  - {{endTaskCheck .}}
 
 users:

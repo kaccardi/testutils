@@ -19,5 +19,4 @@ $sshcmd "ls -l"
 $sshcmd "$ENV ./testutils/ci/install_dependencies.sh"
 $sshcmd "$ENV ./testutils/ci/build_kernel.sh"
 $sshcmd "$ENV ./testutils/ci/install_kernel.sh"
-sleep 20s
 $sshcmd "$ENV bats ./testutils/ci/test.bats"
