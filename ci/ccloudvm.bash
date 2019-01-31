@@ -5,11 +5,13 @@
 
 # needed on the host environment.
 function setupGoLang {
-    pushd /tmp
-    wget https://dl.google.com/go/go1.11.linux-amd64.tar.gz
-    sudo tar -xvf go1.11.linux-amd64.tar.gz
-    sudo mv go /usr/local/
-    popd
+    if [ ! -d "/usr/local/go" ]; then
+        pushd /tmp
+        wget https://dl.google.com/go/go1.11.linux-amd64.tar.gz
+        sudo tar -xvf go1.11.linux-amd64.tar.gz
+        sudo mv go /usr/local/
+        popd
+    fi
     export GOROOT=/usr/local/go
     export PATH=/usr/local/go/bin:$PATH:/bin:/usr/bin
     export PATH=$PATH:$(go env GOPATH)/bin
