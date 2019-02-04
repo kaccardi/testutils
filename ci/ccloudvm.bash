@@ -10,12 +10,12 @@ function setupGoLang {
         wget https://dl.google.com/go/go1.11.linux-amd64.tar.gz
         sudo tar -xvf go1.11.linux-amd64.tar.gz
         sudo mv go /usr/local/
+        export GOROOT=/usr/local/go
+        export GOPATH="${GOPATH:-$HOME/go}"
+        export PATH=$GOROOT/bin:$PATH
+        export PATH=$PATH:$(go env GOPATH)/bin
         popd
     fi
-    export GOROOT=/usr/local/go
-    export PATH=/usr/local/go/bin:$PATH:/bin:/usr/bin
-    export PATH=$PATH:$(go env GOPATH)/bin
-    export GOPATH=$HOME
 }
 
 # setup within the host environment to create the VM under test.

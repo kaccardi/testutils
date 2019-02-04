@@ -12,7 +12,7 @@ createVM "local"
 sshcmd=$(getSSH)
 echo $sshcmd
 $sshcmd "git clone https://github.com/kaccardi/testutils"
-$sshcmd "git clone https://github.com/kaccardi/linux"
+$sshcmd "git clone -b for-testing https://github.com/kaccardi/linux"
 $sshcmd "git clone https://github.com/sstephenson/bats.git"
 $sshcmd "sudo bats/install.sh /usr/local"
 $sshcmd "ls -l"
