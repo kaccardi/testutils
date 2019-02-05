@@ -52,13 +52,13 @@ function waitForVM {
 
 # assumes you've already run setup.
 function createVM {
-    ccloudvm create $1
+    ccloudvm create --name kerneltest $1
     waitForVM
 }
 
 # call from within your host environment.
 function createTestVM {
-    createVM ---name kerneltest "kernel"
+    createVM "kernel"
 }
 
 function deleteTestVM {
