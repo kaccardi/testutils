@@ -58,7 +58,11 @@ function createVM {
 
 # call from within your host environment.
 function createTestVM {
-    createVM "kernel"
+    createVM ---name kerneltest "kernel"
+}
+
+function deleteTestVM {
+    ccloudvm delete kerneltest
 }
 
 function getSSH {
