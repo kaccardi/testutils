@@ -3,11 +3,8 @@
 DIR="${BASH_SOURCE%/*}"
 
 source "$DIR/ccloudvm.bash"
-source "$DIR/semaphoreci.sh"
+source "$DIR/host.bash"
 
-updateUbuntu
+updateHostOS
 setupCcloudVM
 createTestVM
-sshcmd=$(getSSH)
-echo $sshcmd
-$sshcmd "ls -l"

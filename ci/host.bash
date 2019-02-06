@@ -1,6 +1,6 @@
 #!/bin/bash
 #
-# scripts related to the semaphoreci test structure.
+# scripts related to the host build/test system.
 #
 
 function updateUbuntu {
