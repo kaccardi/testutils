@@ -21,9 +21,6 @@ function setupGoLang {
 # setup within the host environment to create the VM under test.
 function setupCcloudVM {
     setupGoLang
-    echo "copying workloads..."
-    mkdir -p ~/.ccloudvm/workloads
-    cp testutils/ccloudvm/* ~/.ccloudvm/workloads
     echo "getting ccloudvm source..."
     go get github.com/intel/ccloudvm/...
     if [[ -n "${SEMAPHORE}" ]]; then
